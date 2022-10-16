@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from '../redux/contactsOperations';
-import {
-  FormForAddContact,
-  Label,
-  Input,
-  ButtomAddContact,
-} from './ui/ContactForm.styled';
+import { Box, TextField, Button } from '@mui/material';
+// import {
+//   FormForAddContact,
+//   Label,
+//   Input,
+//   ButtomAddContact,
+// } from './ui/ContactForm.styled';
 
 export function ContactForm() {
   const [name, setName] = useState('');
@@ -49,34 +50,40 @@ export function ContactForm() {
   };
 
   return (
-    <FormForAddContact onSubmit={handleSubmit}>
-      <Label htmlFor="ContactName">Name</Label>
-      <Input
+    <Box
+      component="form"
+      sx={{
+        '& > :not(style)': { m: 1, width: '25ch' },
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}
+      noValidate
+      autoComplete="off"
+      onSubmit={handleSubmit}
+    >
+      <TextField
+        label="Name"
+        variant="standard"
         type="text"
         name="name"
-        id="ContactName"
         pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-        placeholder="Enter a name to add to contacts"
-        title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
         value={name}
         onChange={handleChangeName}
         required
       />
-
-      <Label htmlFor="ContactNumber">Number </Label>
-      <Input
+      <TextField
+        label="Number"
+        variant="standard"
         type="tel"
         name="number"
-        id="ContactNumber"
         pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-        placeholder="Enter a phone number to add to contacts"
-        title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
         value={phone}
         onChange={handleChangeNumber}
         required
       />
 
-      <ButtomAddContact type="submit">Add contact</ButtomAddContact>
-    </FormForAddContact>
+      <Button variant="outlined">Add contact</Button>
+    </Box>
   );
 }
