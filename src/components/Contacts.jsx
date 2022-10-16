@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { Box, TextField, Button, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { ContactForm } from './ContactForm';
 import { Filter } from './Filter';
 import { ContactList } from './ContactList';
