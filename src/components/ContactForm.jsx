@@ -10,23 +10,22 @@ import { Box, TextField, Button } from '@mui/material';
 // } from './ui/ContactForm.styled';
 
 export function ContactForm() {
+   const dispatch = useDispatch();
   const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
+  const [number, setNumber] = useState('');
   const { items } = useSelector(state => state.root.contacts);
 
   const newContact = {
     name,
-    phone,
+    number,
   };
-
-  const dispatch = useDispatch();
 
   const handleChangeName = evt => {
     setName(evt.currentTarget.value);
   };
 
   const handleChangeNumber = evt => {
-    setPhone(evt.currentTarget.value);
+    setNumber(evt.currentTarget.value);
   };
 
   const handleSubmit = evt => {
@@ -39,19 +38,20 @@ export function ContactForm() {
     if (findName) {
       alert(`${name} is already in contacts`);
       setName('');
-      setPhone('');
+      setNumber('');
       return;
     }
 
     dispatch(addContact(newContact));
 
     setName('');
-    setPhone('');
+    setNumber('');
   };
 
   return (
     <Box
       component="form"
+      onSubmit={handleSubmit}
       sx={{
         '& > :not(style)': { m: 1, width: '25ch' },
         display: 'flex',
@@ -60,7 +60,6 @@ export function ContactForm() {
       }}
       noValidate
       autoComplete="off"
-      onSubmit={handleSubmit}
     >
       <TextField
         label="Name"
@@ -78,12 +77,12 @@ export function ContactForm() {
         type="tel"
         name="number"
         pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-        value={phone}
+        value={number}
         onChange={handleChangeNumber}
         required
       />
 
-      <Button variant="outlined">Add contact</Button>
+      <Button variant="outlined" type="submit">Add contact</Button>
     </Box>
   );
 }

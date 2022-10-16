@@ -23,7 +23,7 @@ const setError = (state, action) => {
 // Слайс для контактов
 export const contactsSlice = createSlice({
   name: 'contacts',
-  initialState: initialState,
+  initialState,
   reducers: {
     filterAdd(state, action) {
       state.filter = action.payload;
@@ -42,9 +42,12 @@ export const contactsSlice = createSlice({
       state.contacts.isLoading = false;
     },
     [addContact.fulfilled]: (state, action) => {
-      state.contacts.items = [action.payload, ...state.contacts.items];
+      
+      console.log(action.payload);
+      state.contacts.items.push(action.payload);
       state.contacts.isLoading = false;
       // console.log('action.payload', action.payload.name);
+       console.log(state.contacts.items);
     },
     [deleteContact.fulfilled]: (state, action) => {
       // console.log(action.payload.id);

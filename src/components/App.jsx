@@ -1,10 +1,12 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { selectIsLoggedIn } from '../redux/selectors';
 import { Layout } from './Layout';
 import { Register } from './Register';
 import { Login } from './Login';
 import { Contacts } from './Contacts';
+import { refreshUser } from "../redux/authOperation";
+import { useEffect } from 'react';
 // import { useSelector } from 'react-redux';
 // import { ContactForm } from './ContactForm';
 // import { Container } from './ui/App.styled';
@@ -13,8 +15,11 @@ import { Contacts } from './Contacts';
 // import { Loader } from './ui/ContactList.styled';
 
 function App() {
+  const dispatch = useDispatch();
   // const { isLoading } = useSelector(state => state.root.contacts);
   const isLoggedIn = useSelector(selectIsLoggedIn);
+
+  useEffect(()=>{dispatch(refreshUser())}, [dispatch])
 
   return (
     <>

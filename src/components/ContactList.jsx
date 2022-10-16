@@ -4,9 +4,10 @@ import { fetchContacts, deleteContact } from '../redux/contactsOperations';
 import { List, Item, ButtonDelete, ContactName } from './ui/ContactList.styled';
 
 export const ContactList = () => {
+  const dispatch = useDispatch();
   const { items, error } = useSelector(state => state.root.contacts);
   const filter = useSelector(state => state.root.filter);
-  const dispatch = useDispatch();
+  
 
   useEffect(() => {
     dispatch(fetchContacts());
@@ -28,10 +29,10 @@ export const ContactList = () => {
     <>
       {error && <h1>Oops, something's wrong... Try again</h1>}
       <List>
-        {contactsList.map(({ id, name, phone }) => (
+        {contactsList.map(({ id, name, number }) => (
           <Item key={id} id={id}>
             <ContactName>{name}:</ContactName>
-            {phone}
+            {number}
             <ButtonDelete
               type="buton"
               onClick={() => dispatch(deleteContact(id))}
