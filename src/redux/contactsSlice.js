@@ -42,22 +42,17 @@ export const contactsSlice = createSlice({
       state.contacts.isLoading = false;
     },
     [addContact.fulfilled]: (state, action) => {
-      
       console.log(action.payload);
       state.contacts.items.push(action.payload);
       state.contacts.isLoading = false;
       // console.log('action.payload', action.payload.name);
-       console.log(state.contacts.items);
+      console.log(state.contacts.items);
     },
     [deleteContact.fulfilled]: (state, action) => {
-      // console.log(action.payload.id);
-      const index = state.contacts.items.findIndex(
-        item => item.id === action.payload.id
-      );
-      state.contacts.items.splice(index, 1);
+      // console.log('deleteContact', action.payload.payload);
+      state.contacts.items = action.payload.payload;
       state.contacts.isLoading = false;
     },
-
     [fetchContacts.rejected]: setError,
     [addContact.rejected]: setError,
     [deleteContact.rejected]: setError,

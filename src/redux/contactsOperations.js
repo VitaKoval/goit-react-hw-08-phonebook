@@ -29,9 +29,12 @@ export const addContact = createAsyncThunk(
 
 export const deleteContact = createAsyncThunk(
   'contacts/deleteContact',
-  async (id, { rejectWithValue }) => {
+  async (id, { rejectWithValue, dispatch }) => {
     try {
-      return await axios.delete(`/contacts/${id}`).then(({ data }) => data);
+      const responses = await axios.delete(`/contacts/${id}`)
+      console.log(responses);
+      return dispatch(fetchContacts());
+      
     } catch (error) {
       return rejectWithValue(error.message);
     }
