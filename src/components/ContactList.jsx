@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Box, Typography, Stack, ListItem, Tooltip, IconButton } from '@mui/material';
 import { fetchContacts, deleteContact } from '../redux/contactsOperations';
-import { List, ButtonDelete, ContactName } from './ui/ContactList.styled';
+import { ContactName } from './ui/ContactList.styled';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 
