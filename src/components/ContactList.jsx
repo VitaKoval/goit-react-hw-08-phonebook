@@ -4,14 +4,15 @@ import {
   Box,
   Typography,
   Stack,
-  ListItem,
   Tooltip,
   IconButton,
+  Paper,
 } from '@mui/material';
+import { AccountCircle} from '@mui/icons-material';
+import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { fetchContacts, deleteContact } from '../redux/contactsOperations';
 import { selectFilter, selectContacts } from '../redux/selectors';
-import { ContactName } from './ui/ContactList.styled';
-import DeleteIcon from '@mui/icons-material/Delete';
 
 export const ContactList = () => {
   const dispatch = useDispatch();
@@ -50,29 +51,46 @@ export const ContactList = () => {
           Oops, something's wrong... Try again
         </Typography>
       )}
-      <Box sx={{ width: '100%' }}>
-        <Stack
-          spacing={3}
-          direction="column-reverse"
-          justifyContent="center"
-          alignItems="center"
-        >
-          {contactsList.map(({ id, name, number }) => (
-            <ListItem key={id} id={id}>
-              <ContactName>{name}:</ContactName>
-              {number}
-              <Tooltip title="Delete">
-                <IconButton
-                  type="buton"
-                  onClick={() => dispatch(deleteContact(id))}
-                >
-                  <DeleteIcon />
-                </IconButton>
-              </Tooltip>
-            </ListItem>
-          ))}
-        </Stack>
-      </Box>
+      <Stack
+        
+        direction="column-reverse"
+        spacing={{ xs: 1, sm: 2, md: 4 }}
+        alignItems="center"
+        justifyContent="center"
+      >
+        {contactsList.map(({ id, name, number }) => (
+          <Paper elevation={3} sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '20px', width: 500 }}>
+          
+              <AccountCircle color='primary' sx={{ mr: "10px", fontSize: 50 }} />
+          
+
+            <Box sx={{textAlign: 'center'}}>
+              <Typography variant="h6" component="p" sx={{ fontWeight: '700', mb: '10px' }}>
+                {name}
+              </Typography>
+              <Typography
+                variant="h8"
+                component="p"
+                
+                sx={{ display: 'inline-flex', justifyContent: 'center', letterSpacing: '.3rem' }}
+              >
+                {' '}
+                <LocalPhoneIcon color="primary" sx={{mr: '10px'}} />
+                {number}
+              </Typography>
+            </Box>
+
+            <Tooltip title="Delete">
+              <IconButton
+                type="buton"
+                onClick={() => dispatch(deleteContact(id))}
+              >
+                <DeleteIcon />
+              </IconButton>
+            </Tooltip>
+          </Paper>
+        ))}
+      </Stack>
     </>
   );
 };

@@ -1,10 +1,12 @@
 import { useSelector } from 'react-redux';
-import { Box, Typography } from '@mui/material';
-import { selectContacts } from "../redux/selectors";
+import { Box, Typography, CircularProgress } from '@mui/material';
+
+
+import { selectContacts } from '../redux/selectors';
 import { ContactForm } from './ContactForm';
 import { Filter } from './Filter';
 import { ContactList } from './ContactList';
-import { Loader } from './ui/ContactList.styled';
+// import { Loader } from './ui/ContactList.styled';
 
 export function Contacts() {
   const { isLoading } = useSelector(selectContacts);
@@ -40,7 +42,12 @@ export function Contacts() {
             mb: '-30px',
           }}
         >
-          My contacts {isLoading && <Loader />}
+          My contacts{' '}
+          {isLoading && (
+            <Box sx={{ display: 'inline-flex' }}>
+              <CircularProgress sx={{ color: 'rgba(25, 118, 210, 0.2)' }}/>
+            </Box>
+          )}
         </Typography>
 
         <Filter />
