@@ -1,15 +1,22 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Box, Typography, Stack, ListItem, Tooltip, IconButton } from '@mui/material';
+import {
+  Box,
+  Typography,
+  Stack,
+  ListItem,
+  Tooltip,
+  IconButton,
+} from '@mui/material';
 import { fetchContacts, deleteContact } from '../redux/contactsOperations';
+import { selectFilter, selectContacts } from '../redux/selectors';
 import { ContactName } from './ui/ContactList.styled';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-
 export const ContactList = () => {
   const dispatch = useDispatch();
-  const { items, error } = useSelector(state => state.root.contacts);
-  const filter = useSelector(state => state.root.filter);
+  const { items, error } = useSelector(selectContacts);
+  const filter = useSelector(selectFilter);
 
   useEffect(() => {
     // тут setTimeout, что бы поменять очередность выполнения асинхронных функций при refresh страницы (запускается запрос на бэк за контактами и запросс за пользователем)
@@ -17,8 +24,6 @@ export const ContactList = () => {
       dispatch(fetchContacts());
     });
   }, [dispatch]);
-
-  // console.log(items);
 
   const filteredContacts = () => {
     const normalizedFilter = filter?.toLowerCase();
@@ -57,17 +62,13 @@ export const ContactList = () => {
               <ContactName>{name}:</ContactName>
               {number}
               <Tooltip title="Delete">
-                <IconButton type="buton"
-                onClick={() => dispatch(deleteContact(id))}>
+                <IconButton
+                  type="buton"
+                  onClick={() => dispatch(deleteContact(id))}
+                >
                   <DeleteIcon />
                 </IconButton>
               </Tooltip>
-              {/* <ButtonDelete
-                type="buton"
-                onClick={() => dispatch(deleteContact(id))}
-              >
-                Delete
-              </ButtonDelete> */}
             </ListItem>
           ))}
         </Stack>

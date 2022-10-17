@@ -4,10 +4,6 @@ import { selectIsLoggedIn } from './selectors';
 
 export function PublicRoute({ children, redirect = '/', restricted = false }) {
   const isLoggedIn = useSelector(selectIsLoggedIn);
-
-  const shouldRedirect = isLoggedIn && restricted;
-
-  console.log(shouldRedirect);
-
+// публичный ограниченный маршрут 
   return isLoggedIn && restricted ? <Navigate to={redirect} /> : children;
 }

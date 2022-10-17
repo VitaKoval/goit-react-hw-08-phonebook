@@ -1,10 +1,9 @@
-import { Link } from 'react-router-dom';
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { AppBar, Toolbar, Typography } from '@mui/material';
 import { selectIsLoggedIn } from '../redux/selectors';
 import { Navigation } from './Navigation';
 import { UserMenu } from './UserMenu';
-import { AppBar, Toolbar, Typography } from '@mui/material';
 
 export function Header() {
   const isLoggedIn = useSelector(selectIsLoggedIn);
@@ -13,18 +12,17 @@ export function Header() {
     <>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h5" component="div">
-            <Link
-              style={{
-                textDecoration: 'none',
-                color: 'inherit',
-                fontWeight: '700',
-                letterSpacing: '.3rem',
-              }}
-              to="/"
-            >
-              PHONE book
-            </Link>
+          <Typography
+            variant="h5"
+            component="div"
+            sx={{
+              textDecoration: 'none',
+              color: 'inherit',
+              fontWeight: '700',
+              letterSpacing: '.3rem',
+            }}
+          >
+            PHONE book
           </Typography>
           {isLoggedIn ? <UserMenu /> : <Navigation />}
         </Toolbar>

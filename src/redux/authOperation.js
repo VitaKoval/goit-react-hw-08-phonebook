@@ -21,7 +21,6 @@ export const signUp = createAsyncThunk(
       return axios
         .post(`/users/signup`, registrationDetails)
         .then(({ data }) => {
-          // console.log('POST', data);
           // после успешной регистрации в хедер всех запроссов добавляем токен
           token.set(data.token);
           return data;
@@ -54,6 +53,7 @@ export const logOut = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const { data } = axios.post(`/users/logout`);
+      // после разлогинивания - убираем из хедера токен
       token.unset();
       return data;
     } catch (error) {
@@ -71,7 +71,7 @@ export const refreshUser = createAsyncThunk(
     if (persistToken === null) {
       console.log('NO token');
       return rejectWithValue();
-      // тут не можем просто return -  gthtlftv d ыефеу undefinde, а так прокидываем ошибку
+      // тут не можем просто return -  возвращаем и записываем undefinde, а так прокидываем ошибку
     }
 
     token.set(persistToken);

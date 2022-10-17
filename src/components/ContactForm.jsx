@@ -1,19 +1,14 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from '../redux/contactsOperations';
 import { Box, TextField, Button } from '@mui/material';
-// import {
-//   FormForAddContact,
-//   Label,
-//   Input,
-//   ButtomAddContact,
-// } from './ui/ContactForm.styled';
+import { selectContacts } from "../redux/selectors";
+import { addContact } from '../redux/contactsOperations';
 
 export function ContactForm() {
-   const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-  const { items } = useSelector(state => state.root.contacts);
+  const { items } = useSelector(selectContacts);
 
   const newContact = {
     name,
@@ -82,7 +77,9 @@ export function ContactForm() {
         required
       />
 
-      <Button variant="outlined" type="submit">Add contact</Button>
+      <Button variant="outlined" type="submit">
+        Add contact
+      </Button>
     </Box>
   );
 }

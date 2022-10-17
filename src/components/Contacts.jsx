@@ -1,12 +1,13 @@
 import { useSelector } from 'react-redux';
 import { Box, Typography } from '@mui/material';
+import { selectContacts } from "../redux/selectors";
 import { ContactForm } from './ContactForm';
 import { Filter } from './Filter';
 import { ContactList } from './ContactList';
 import { Loader } from './ui/ContactList.styled';
 
 export function Contacts() {
-  const { isLoading } = useSelector(state => state.root.contacts);
+  const { isLoading } = useSelector(selectContacts);
 
   return (
     <>

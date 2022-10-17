@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Button, IconButton } from '@mui/material';
 import { AccountCircle, Logout } from '@mui/icons-material';
 import { selectUserEmail, selectUserName } from '../redux/selectors';
-import { logOut } from "../redux/authOperation";
+import { logOut } from '../redux/authOperation';
 
 export function UserMenu() {
   const dispatch = useDispatch();
@@ -25,7 +25,7 @@ export function UserMenu() {
       </IconButton>
 
       <p style={{ margin: '3px' }}>{userEmail}</p>
-      <Button onClick={()=>dispatch(logOut())}  color="inherit">
+      <Button onClick={() => dispatch(logOut())} color="inherit">
         <Logout fontSize="small" sx={{ mr: 1 }} />
         Logout{' '}
       </Button>

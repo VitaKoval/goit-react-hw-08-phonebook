@@ -7,12 +7,9 @@ export const Layout = () => {
   return (
     <div>
       <Header />
-      {/* <Suspense> */}
       <Container maxWidth="md" sx={{ pt: '20px', pb: '20px' }}>
         <Outlet />
       </Container>
-
-      {/* </Suspense> */}
     </div>
   );
 };
