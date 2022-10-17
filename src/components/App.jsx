@@ -22,7 +22,6 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route
             index
-            path="login"
             element={
               <PublicRoute redirect="/contacts" restricted>
                 <Login />
