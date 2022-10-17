@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
+import { TextField, Typography, Box } from '@mui/material';
 import { filterAdd } from '../redux/contactsSlice';
-import { Containerfilter, LabelFilter, InputFiler } from './ui/Filter.styled';
+import { Containerfilter } from './ui/Filter.styled';
 
 export const Filter = () => {
   const valueFilter = useSelector(state => state.filter);
@@ -12,16 +13,19 @@ export const Filter = () => {
 
   return (
     <Containerfilter>
-      <LabelFilter htmlFor="filterContact">Find contacts by name </LabelFilter>
-      <InputFiler
-        type="text"
+      <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'baseline'}}>
+       <Typography variant="h6" component="div" sx={{mr: '15px',  letterSpacing: '.2rem'}}>Find contacts</Typography>
+      <TextField
+        type="search"
+        label="Name"
+        variant="standard"
         name="filter"
-        placeholder="Enter a name for the search query"
-        id="filterContact"
         title="Filter is case insensitive"
         value={valueFilter}
         onChange={filterChange}
       />
+</Box>
+     
     </Containerfilter>
   );
 };

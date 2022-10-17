@@ -6,23 +6,45 @@ import { ContactList } from './ContactList';
 import { Loader } from './ui/ContactList.styled';
 
 export function Contacts() {
- const { isLoading } = useSelector(state => state.root.contacts);
+  const { isLoading } = useSelector(state => state.root.contacts);
 
   return (
     <>
-      {/* <Typography variant="h5" component="div">Phonebook</Typography> */}
-      {/* <h1>Phonebook</h1> */}
-      <ContactForm />
-<Box
+      <Typography
+        variant="h2"
+        component="div"
         sx={{
-        // borderTop: '1px solid #1976d2', 
-        boxShadow: '0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%)',
-      }}
-    >
-      <Typography variant="h5" component="div" >My contacts {isLoading && <Loader />}</Typography>
-      </Box>
+          color: 'rgba(25, 118, 210, 0.2)',
+          fontWeight: '700',
+          letterSpacing: '.3rem',
+          mb: '-50px',
+        }}
+      >
+        Adding contacts
+      </Typography>
+      <ContactForm />
+      <Box
+        sx={{
+          boxShadow:
+            '0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%)',
+        }}
+      >
+        <Typography
+          variant="h2"
+          component="div"
+          sx={{
+            color: 'rgba(25, 118, 210, 0.2)',
+            fontWeight: '700',
+            letterSpacing: '.3rem',
+            mb: '-30px',
+          }}
+        >
+          My contacts {isLoading && <Loader />}
+        </Typography>
+
         <Filter />
-      <ContactList />
+        <ContactList />
+      </Box>
     </>
   );
 }

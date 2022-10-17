@@ -66,15 +66,15 @@ export const refreshUser = createAsyncThunk(
   'auth/refresh',
   async (_, { getState, rejectWithValue }) => {
     const state = getState();
-    const persastToken = state.auth.token;
+    const persistToken = state.auth.token;
 
-    if (persastToken === null) {
-      // console.log('NO token');
+    if (persistToken === null) {
+      console.log('NO token');
       return rejectWithValue();
       // тут не можем просто return -  gthtlftv d ыефеу undefinde, а так прокидываем ошибку
     }
 
-    token.set(persastToken);
+    token.set(persistToken);
 
     try {
       return axios.get(`/users/current`).then(({ data }) => {
