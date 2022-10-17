@@ -20,8 +20,9 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Layout />}>
+          <Route index element={<Navigate to='/login'/> }/>
           <Route
-            index
+            path="login"
             element={
               <PublicRoute redirect="/contacts" restricted>
                 <Login />
