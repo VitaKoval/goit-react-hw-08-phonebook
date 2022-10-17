@@ -1,20 +1,16 @@
 import React, { useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectIsLoggedIn } from '../redux/selectors';
+import { useDispatch } from 'react-redux';
+import { refreshUser } from '../redux/authOperation';
+import { PrivateRoute } from '../redux/PrivateRoute';
+import { PublicRoute } from '../redux/PublicRoute';
 import { Layout } from './Layout';
 import { Register } from './Register';
 import { Login } from './Login';
 import { Contacts } from './Contacts';
-import { refreshUser } from '../redux/authOperation';
-import { PrivateRoute } from '../redux/PrivateRoute';
-
 
 function App() {
   const dispatch = useDispatch();
-  // const { isLoading } = useSelector(state => state.root.contacts);
-  const isLoggedIn = useSelector(selectIsLoggedIn);
-  console.log('isLoggedIn', isLoggedIn);
 
   useEffect(() => {
     dispatch(refreshUser());
@@ -24,18 +20,32 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Navigate to="/contacts" />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route
+            index
+            path="login"
+            element={
+              <PublicRoute redirect="/contacts" restricted>
+                <Login />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="register"
+            element={
+              <PublicRoute redirect="/contacts" restricted>
+                <Register />
+              </PublicRoute>
+            }
+          />
           <Route
             path="contacts"
             element={
-              <PrivateRoute redirect='/login'>
+              <PrivateRoute redirect="/login">
                 <Contacts />
               </PrivateRoute>
             }
           />
-          <Route path="*" element={<Navigate to='/contacts' />} />
+          <Route path="*" element={<Navigate to="/login" />} />
         </Route>
       </Routes>
     </>
